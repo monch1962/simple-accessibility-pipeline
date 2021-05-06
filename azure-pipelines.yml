@@ -18,14 +18,17 @@ steps:
   displayName: 'npm install and build'
  
 - script: |
+    # List of URLs to run accessibility tests against
     URLS_COMMA_SEPARATED=https://www.uts.edu.au
+    
     # Install the Axe CLI accessibility testing tool
     npm install -g axe-cli
     axe --help
 
     # Run the Axe accessibility tests (if there's more pages to test, just give it a comma-separated list of URLs)
     # Appending --exit will cause the tests to exit 1 if problems are found. This could be handy but I'm not using it yet
-    axe $URLS_COMMA_SEPARATED --exit
+    axe $URLS_COMMA_SEPARATED --save accessibility-violations.json --exit
+    cat accessibility-violations.json | jq ".[0].violations"
 
   displayName: 'Run Axe accessibility tests'
   
