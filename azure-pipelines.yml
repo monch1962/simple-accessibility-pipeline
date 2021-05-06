@@ -27,7 +27,7 @@ steps:
 
     # Run the Axe accessibility tests (if there's more pages to test, just give it a comma-separated list of URLs)
     # Appending --exit will cause the tests to exit 1 if problems are found. This could be handy but I'm not using it yet
-    axe $URLS_COMMA_SEPARATED --json accessibility-violations.json --exit
+    axe $URLS_COMMA_SEPARATED --save accessibility-violations.json --exit
     cat accessibility-violations.json
 
   displayName: 'Run Axe accessibility tests'
