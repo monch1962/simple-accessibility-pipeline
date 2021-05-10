@@ -13,20 +13,10 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    # Install the app and all its dependencies
-    npm install
-  displayName: 'npm install and build'
- 
-- script: |
     URL=https://www.uts.edu.au
-    # Install the Axe CLI accessibility testing tool
-    #npm install -g axe-cli
-    #axe --help
+
     docker pull gcr.io/check-accessibility/check-accessibility:0.1
 
-    # Run the Axe accessibility tests (if there's more pages to test, just give it a comma-separated list of URLs)
-    # Appending --exit will cause the tests to exit 1 if problems are found. This could be handy but I'm not using it yet
-    #axe $URLS_COMMA_SEPARATED --exit
     docker run -e URL=$URL gcr.io/check-accessibility/check-accessibility:0.1 > accessibility_results.json
     cat accessibility_results.json
     
